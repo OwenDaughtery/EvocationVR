@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
+    public float areaOfEffect = 0.1f;
+    public LayerMask whatIsDestructible;
+    public int damage = 1;
+    //public ObjectPoolerManager objectPool = ObjectPoolerManager.SharedInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,28 +18,20 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anyKeyPressed();
-    }
-
-    private void anyKeyPressed() {
-        if (Input.GetKeyDown("e"))
-        {
-            shootSpell();
-        }
-    }
-
-    private void shootSpell()
-    {
         
-        GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject("TestSpell");
-        if (testSpell != null)
-        {
-            //set position of bullet
-            testSpell.transform.position = this.transform.position;
-            testSpell.SetActive(true);
+    }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag=="Environment") {
+            Collider[] objectsToDamage = Physics.OverlapSphere(transform.position, areaOfEffect);
+            print(objectsToDamage.Length);
+            for (int i = 0; i < objectsToDamage.Length; i++){
+                print("enter");
+                objectsToDamage[i].GetComponent<DestructibleManager>().reduceHealth(damage);
+            }
 
+            ObjectPoolerManager.SharedInstance.returnToPool(this.gameObject, "TestSpell");
         }
-
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - FxTemporaire
   - Fire
   - TestSpell
+  - EndOfWand
+  - Wand
+  - Environment
   layers:
   - Default
   - TransparentFX

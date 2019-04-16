@@ -70,5 +70,11 @@ public class ObjectPoolerManager : MonoBehaviour
         return null;
     }
 
+    public void returnToPool(GameObject gameObject, string tag){
+        gameObject.SetActive(false);
+        pooledObjects.Add(gameObject);
+        gameObject.transform.parent = this.transform;
+    }
+
 
 }
