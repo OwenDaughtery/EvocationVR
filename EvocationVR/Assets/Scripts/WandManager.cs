@@ -5,11 +5,12 @@ using UnityEngine;
 public class WandManager : MonoBehaviour
 {
 
-    public int speed = 20;
+    public int speed;
     public Transform endOfWand;
     public GameObject camera;
     public float startAngleX;
     public Vector3 startAngle;
+    public List<GameObject> activeSpells;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +33,13 @@ public class WandManager : MonoBehaviour
     private void anyKeyPressed() {
         if (Input.GetKeyDown("e"))
         {
-            shootSpell();
+            shootSpell("TestSpell");
         }
     }
 
-    private void shootSpell()
+    private void shootSpell(string tag)
     {
-        GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject("TestSpell");
+        GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
         if (testSpell != null)
         {
             //set position of bullet

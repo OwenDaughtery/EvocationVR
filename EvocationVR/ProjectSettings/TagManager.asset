@@ -11,6 +11,7 @@ TagManager:
   - EndOfWand
   - Wand
   - Environment
+  - BrokenCube
   layers:
   - Default
   - TransparentFX
