@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
-    public float areaOfEffect = 0.1f;
+    public float areaOfEffect = 0.01f;
     public LayerMask whatIsDestructible;
     public int damage = 1;
     //public ObjectPoolerManager objectPool = ObjectPoolerManager.SharedInstance;
@@ -24,14 +24,14 @@ public class SpellManager : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag=="Environment") {
-            Collider[] objectsToDamage = Physics.OverlapSphere(transform.position, areaOfEffect);
-            print(objectsToDamage.Length);
-            for (int i = 0; i < objectsToDamage.Length; i++){
-                print("enter");
+            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage);
+            /*Collider[] objectsToDamage = Physics.OverlapSphere(transform.position, areaOfEffect);
+            /for (int i = 0; i < objectsToDamage.Length; i++){
                 objectsToDamage[i].GetComponent<DestructibleManager>().reduceHealth(damage);
-            }
-
+            }*/
+            print("test");
             ObjectPoolerManager.SharedInstance.returnToPool(this.gameObject, "TestSpell");
+            print("test");
         }
     }
 }

@@ -10,7 +10,6 @@ public class WandManager : MonoBehaviour
     public GameObject camera;
     public float startAngleX;
     public Vector3 startAngle;
-    public ObjectPoolerManager objectPool;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +38,7 @@ public class WandManager : MonoBehaviour
 
     private void shootSpell()
     {
-        GameObject testSpell = objectPool.GetPooledObject("TestSpell");
-
+        GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject("TestSpell");
         if (testSpell != null)
         {
             //set position of bullet
