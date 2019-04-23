@@ -25,6 +25,7 @@ public class WandManager : MonoBehaviour
         spellCosts.Add("TestSpell", 1);
         spellCosts.Add("ArcSpell", 2);
         spellCosts.Add("WardSpell", 1.25f);
+        spellCosts.Add("ForceSpell", 5f);
     }
 
     // Update is called once per frame
@@ -47,6 +48,9 @@ public class WandManager : MonoBehaviour
         if (Input.GetKeyDown("r")) {
             shootSpell("WardSpell");
         }
+        if (Input.GetKeyDown("f")){
+            shootSpell("ForceSpell");
+        }
     }
 
     private void shootSpell(string tag)
@@ -67,32 +71,44 @@ public class WandManager : MonoBehaviour
 
                 testSpell.transform.rotation = wandRotation;
                 testSpell.SetActive(true);
+                testSpell.GetComponent<MeshRenderer>().enabled = true;
 
                 testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));
 
             }
         }
-        else if (tag=="ArcSpell" && manaManager.subtractMana(spellCosts[tag])) {
+        else if (tag == "ArcSpell" && manaManager.subtractMana(spellCosts[tag]))
+        {
         }
-        else if(tag=="WardSpell" && manaManager.subtractMana(spellCosts[tag])){
+        else if (tag == "WardSpell" && manaManager.subtractMana(spellCosts[tag]))
+        {
             GameObject wardSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
             if (wardSpell != null)
             {
                 //set position
                 Vector3 wandPos = endOfWand.position;
                 Vector3 wandDirection = endOfWand.forward;
-                float direction = this.gameObject.transform.eulerAngles.y+90f;
+                float direction = this.gameObject.transform.eulerAngles.y + 90f;
                 //Quaternion wandRotation = endOfWand.rotation;
                 Vector3 spawnPos = wandPos;
-                
+
 
                 wardSpell.transform.position = spawnPos;
 
-                wardSpell.transform.localEulerAngles = new Vector3(0f,direction,0f);
+                wardSpell.transform.localEulerAngles = new Vector3(0f, direction, 0f);
                 wardSpell.SetActive(true);
 
                 //testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));
 
+            }
+        }
+        else if (tag == "ForceSpell" && manaManager.subtractMana(spellCosts[tag])) {
+            GameObject forceSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
+            if (forceSpell) {
+                //set position
+                Vector3 spawnPos = transform.parent.transform.position;
+                forceSpell.transform.position = spawnPos;
+                forceSpell.SetActive(true);
             }
         }
 

@@ -16,6 +16,8 @@ TagManager:
   - GameManager
   - Enemy
   - BrokenEnemy
+  - ForceSpell
+  - Terrain
   layers:
   - Default
   - TransparentFX

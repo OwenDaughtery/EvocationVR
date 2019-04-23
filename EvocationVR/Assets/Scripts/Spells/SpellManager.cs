@@ -10,6 +10,8 @@ public class SpellManager : MonoBehaviour
     public float maxLifeTime;
     public float currentLifeTime;
     public string tag;
+    [SerializeField]
+    public List<string> tagsToIngore = new List<string>();
 
     //public ObjectPoolerManager objectPool = ObjectPoolerManager.SharedInstance;
 
@@ -26,7 +28,7 @@ public class SpellManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         checkActiveTime();
     }
@@ -45,14 +47,17 @@ public class SpellManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        
         if (other.gameObject.tag=="Environment") {
+            
             other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, this.GetComponent<Rigidbody>().velocity.magnitude);
         }
         if (other.gameObject.tag == "Enemy") {
+            
             other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
         }
 
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Wand") {
+        if (!tagsToIngore.Contains(other.gameObject.tag)) {
             StartCoroutine(collided());
         }
         
@@ -60,7 +65,7 @@ public class SpellManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Wand") {
+        if (!tagsToIngore.Contains(other.gameObject.tag)) {
             StartCoroutine(collided());
         }
     }

@@ -199,3 +199,6 @@ MonoBehaviour:
   maxLifeTime: 0.3
   currentLifeTime: 0
   tag: 
+  tagsToIngore:
+  - Player
+  - Wand
