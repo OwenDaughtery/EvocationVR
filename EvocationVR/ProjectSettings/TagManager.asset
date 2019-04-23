@@ -12,6 +12,7 @@ TagManager:
   - Wand
   - Environment
   - BrokenCube
+  - WardSpell
   layers:
   - Default
   - TransparentFX

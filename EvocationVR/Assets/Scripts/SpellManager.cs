@@ -7,7 +7,7 @@ public class SpellManager : MonoBehaviour
     public float areaOfEffect = 0.01f;
     public LayerMask whatIsDestructible;
     public int damage = 1;
-    public float maxLifeTime = 0.2f;
+    public float maxLifeTime;
     public float currentLifeTime;
     public string tag;
 
@@ -16,12 +16,13 @@ public class SpellManager : MonoBehaviour
     private void OnEnable()
     {
         currentLifeTime = 0f;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        tag = this.gameObject.transform.tag;
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class SpellManager : MonoBehaviour
         currentLifeTime += Time.deltaTime;
         if (currentLifeTime>=maxLifeTime) {
             ObjectPoolerManager.SharedInstance.returnToPool(this.gameObject, "TestSpell");
+
         }
     }
 
@@ -46,10 +48,17 @@ public class SpellManager : MonoBehaviour
         if (other.gameObject.tag=="Environment") {
             other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, this.GetComponent<Rigidbody>().velocity.magnitude);
         }
-        if (other.gameObject.tag != "Player") {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Wand") {
             StartCoroutine(collided());
         }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Wand") {
+            StartCoroutine(collided());
+        }
     }
 
     IEnumerator collided(){

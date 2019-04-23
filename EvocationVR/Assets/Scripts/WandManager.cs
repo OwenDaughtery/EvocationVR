@@ -81,12 +81,14 @@ public class WandManager : MonoBehaviour
                 //set position
                 Vector3 wandPos = endOfWand.position;
                 Vector3 wandDirection = endOfWand.forward;
+                float direction = this.gameObject.transform.eulerAngles.y+90f;
                 //Quaternion wandRotation = endOfWand.rotation;
                 Vector3 spawnPos = wandPos;
-
+                
 
                 wardSpell.transform.position = spawnPos;
 
+                wardSpell.transform.localEulerAngles = new Vector3(0f,direction,0f);
                 wardSpell.SetActive(true);
 
                 //testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));

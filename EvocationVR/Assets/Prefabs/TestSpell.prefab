@@ -198,4 +198,4 @@ MonoBehaviour:
   damage: 1
   maxLifeTime: 0.3
   currentLifeTime: 0
-  tag: TestSpell
+  tag: 
