@@ -64,9 +64,20 @@ public class SpellManager : MonoBehaviour
     IEnumerator collided(){
         yield return new WaitForEndOfFrame();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        int numberOfChildren = this.transform.childCount;
+        for (int i = 0; i < numberOfChildren; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+            child.SetActive(false);
+        }
         yield return new WaitForEndOfFrame();
         ObjectPoolerManager.SharedInstance.returnToPool(this.gameObject, "TestSpell");
         gameObject.GetComponent<MeshRenderer>().enabled = true;
+        for (int i = 0; i < numberOfChildren; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+            child.SetActive(true);
+        }
         StopCoroutine(collided());
     }
 
