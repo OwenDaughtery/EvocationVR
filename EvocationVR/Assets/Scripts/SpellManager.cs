@@ -48,6 +48,10 @@ public class SpellManager : MonoBehaviour
         if (other.gameObject.tag=="Environment") {
             other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, this.GetComponent<Rigidbody>().velocity.magnitude);
         }
+        if (other.gameObject.tag == "Enemy") {
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
+        }
+
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Wand") {
             StartCoroutine(collided());
         }

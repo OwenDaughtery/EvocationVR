@@ -41,18 +41,18 @@ public class DestructibleManager : MonoBehaviour
 
             if (this.GetComponent<Rigidbody>().velocity.magnitude > hardness)
             {
-                print("check1");
+
                 reduceHealth(this.GetComponent<Rigidbody>().velocity.magnitude, this.GetComponent<Rigidbody>().velocity.magnitude);
             }
             else if (collision.transform.GetComponent<Rigidbody>().velocity.magnitude > hardness) {
-                print("check2");
+
                 reduceHealth(collision.transform.GetComponent<Rigidbody>().velocity.magnitude, collision.transform.GetComponent<Rigidbody>().velocity.magnitude);
             }
         }
     }
 
     public void reduceHealth(float damage, float magnitude) {
-        print("called with damage" + damage);
+
         if (magnitude >= hardness) {
             health -= damage;
         }

@@ -14,6 +14,8 @@ TagManager:
   - BrokenCube
   - WardSpell
   - GameManager
+  - Enemy
+  - BrokenEnemy
   layers:
   - Default
   - TransparentFX
