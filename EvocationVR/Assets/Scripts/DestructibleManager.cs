@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestructibleManager : MonoBehaviour
 {
-    public int health;
+    public float health;
     public float hardness;
     public string itemToReplaceWith;
 
@@ -34,8 +34,25 @@ public class DestructibleManager : MonoBehaviour
 
     }
 
-    public void reduceHealth(int damage, float magnitude) {
-        print("hit by magnitude " + magnitude);
+    public void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.transform.tag != "TestSpell" && health>=0) {
+
+            if (this.GetComponent<Rigidbody>().velocity.magnitude > hardness)
+            {
+                print("check1");
+                reduceHealth(this.GetComponent<Rigidbody>().velocity.magnitude, this.GetComponent<Rigidbody>().velocity.magnitude);
+            }
+            else if (collision.transform.GetComponent<Rigidbody>().velocity.magnitude > hardness) {
+                print("check2");
+                reduceHealth(collision.transform.GetComponent<Rigidbody>().velocity.magnitude, collision.transform.GetComponent<Rigidbody>().velocity.magnitude);
+            }
+        }
+    }
+
+    public void reduceHealth(float damage, float magnitude) {
+        print("called with damage" + damage);
         if (magnitude >= hardness) {
             health -= damage;
         }
