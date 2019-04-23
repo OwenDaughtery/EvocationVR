@@ -11,6 +11,8 @@ public class WandManager : MonoBehaviour
     public float startAngleX;
     public Vector3 startAngle;
     public List<GameObject> activeSpells;
+    public Dictionary<string, float> spellCosts = new Dictionary<string, float>();
+    public ManaManager manaManager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,10 @@ public class WandManager : MonoBehaviour
         startAngle = new Vector3(startAngleX, 0f, 0f);
         endOfWand = transform.GetChild(0);
         camera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        spellCosts.Add("TestSpell", 1);
+        spellCosts.Add("ArcSpell", 2);
+        spellCosts.Add("WardSpell", 1.25f);
     }
 
     // Update is called once per frame
@@ -35,28 +41,59 @@ public class WandManager : MonoBehaviour
         {
             shootSpell("TestSpell");
         }
+        if (Input.GetKeyDown("q")) {
+            shootSpell("ArcSpell");
+        }
+        if (Input.GetKeyDown("r")) {
+            shootSpell("WardSpell");
+        }
     }
 
     private void shootSpell(string tag)
     {
-        GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
-        if (testSpell != null)
+        if (tag == "TestSpell" && manaManager.subtractMana(spellCosts[tag]))
         {
-            //set position of bullet
-            Vector3 wandPos = endOfWand.position;
-            Vector3 wandDirection = endOfWand.forward;
-            Quaternion wandRotation = endOfWand.rotation;
-            Vector3 spawnPos = wandPos;
+            GameObject testSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
+            if (testSpell != null)
+            {
+                //set position of bullet
+                Vector3 wandPos = endOfWand.position;
+                Vector3 wandDirection = endOfWand.forward;
+                Quaternion wandRotation = endOfWand.rotation;
+                Vector3 spawnPos = wandPos;
 
 
-            testSpell.transform.position = spawnPos;
+                testSpell.transform.position = spawnPos;
 
-            testSpell.transform.rotation = wandRotation;
-            testSpell.SetActive(true);
+                testSpell.transform.rotation = wandRotation;
+                testSpell.SetActive(true);
 
-            testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));
+                testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));
 
+            }
         }
+        else if (tag=="ArcSpell" && manaManager.subtractMana(spellCosts[tag])) {
+        }
+        else if(tag=="WardSpell" && manaManager.subtractMana(spellCosts[tag])){
+            GameObject wardSpell = ObjectPoolerManager.SharedInstance.GetPooledObject(tag);
+            if (wardSpell != null)
+            {
+                //set position
+                Vector3 wandPos = endOfWand.position;
+                Vector3 wandDirection = endOfWand.forward;
+                //Quaternion wandRotation = endOfWand.rotation;
+                Vector3 spawnPos = wandPos;
+
+
+                wardSpell.transform.position = spawnPos;
+
+                wardSpell.SetActive(true);
+
+                //testSpell.GetComponent<Rigidbody>().velocity = testSpell.transform.TransformDirection(new Vector3(0, speed, 0));
+
+            }
+        }
+
 
     }
 }
