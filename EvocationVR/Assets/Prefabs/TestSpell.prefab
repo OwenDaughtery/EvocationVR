@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8916979059919652157}
   - component: {fileID: 8002233693979666461}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 3096427090812474411}
   - component: {fileID: 3352777560534711808}
   - component: {fileID: 2704312163998250438}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestSpell
   m_TagString: TestSpell
   m_Icon: {fileID: 0}
@@ -199,6 +199,5 @@ MonoBehaviour:
   maxLifeTime: 0.3
   currentLifeTime: 0
   tag: 
-  tagsToIngore:
-  - Player
-  - Wand
+  tagsToIngore: []
+  layersToIgnore: 0b000000

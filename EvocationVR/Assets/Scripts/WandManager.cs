@@ -22,10 +22,10 @@ public class WandManager : MonoBehaviour
         endOfWand = transform.GetChild(0);
         camera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        spellCosts.Add("TestSpell", 1);
-        spellCosts.Add("ArcSpell", 2);
-        spellCosts.Add("WardSpell", 1.25f);
-        spellCosts.Add("ForceSpell", 5f);
+        spellCosts.Add("TestSpell", 0.1f); //1
+        spellCosts.Add("ArcSpell", 0.1f); //2 
+        spellCosts.Add("WardSpell", 0.1f); //1.25
+        spellCosts.Add("ForceSpell", 0.1f); //5
     }
 
     // Update is called once per frame
@@ -42,13 +42,13 @@ public class WandManager : MonoBehaviour
         {
             shootSpell("TestSpell");
         }
-        if (Input.GetKeyDown("q")) {
+        /*if (Input.GetKeyDown("q")) {
             shootSpell("ArcSpell");
-        }
+        }*/
         if (Input.GetKeyDown("r")) {
             shootSpell("WardSpell");
         }
-        if (Input.GetKeyDown("f")){
+        if (Input.GetKeyDown("q")){
             shootSpell("ForceSpell");
         }
     }

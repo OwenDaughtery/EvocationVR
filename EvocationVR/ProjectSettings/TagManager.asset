@@ -4,9 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - projectile
-  - FxTemporaire
-  - Fire
   - TestSpell
   - EndOfWand
   - Wand
@@ -18,6 +15,7 @@ TagManager:
   - BrokenEnemy
   - ForceSpell
   - Terrain
+  - Cube
   layers:
   - Default
   - TransparentFX
@@ -28,9 +26,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Spell
+  - Destructible Terrain
+  - Player
   - 
   - 
   - 

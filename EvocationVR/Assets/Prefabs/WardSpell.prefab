@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2433346834130400882}
   - component: {fileID: 9062192658868609734}
   - component: {fileID: 4551305588955934196}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WardSpell
   m_TagString: WardSpell
   m_Icon: {fileID: 0}
@@ -112,3 +112,5 @@ MonoBehaviour:
   maxLifeTime: 1
   currentLifeTime: 0
   tag: 
+  tagsToIngore: []
+  layersToIgnore: 0b000000
