@@ -16,6 +16,9 @@ TagManager:
   - ForceSpell
   - Terrain
   - Cube
+  - Object
+  - BrokenMarbleCube
+  - BrokenSteelCube
   layers:
   - Default
   - TransparentFX
@@ -29,7 +32,7 @@ TagManager:
   - Spell
   - Destructible Terrain
   - Player
-  - 
+  - Object
   - 
   - 
   - 

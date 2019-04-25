@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
-    public float areaOfEffect = 0.01f;
-    public LayerMask whatIsDestructible;
+
     public int damage = 1;
     public float maxLifeTime;
     public float currentLifeTime;
@@ -54,14 +53,21 @@ public class SpellManager : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         
+        //if the item is destructible
         if (other.gameObject.layer==10) {
-            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, this.GetComponent<Rigidbody>().velocity.magnitude);
-        }
-        if (other.gameObject.tag == "Enemy") {
-            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
+            //Debug.Log(other.transform.name);
+            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, int.MaxValue);
         }
 
+        //if the item is an enemy
+        if (other.gameObject.tag == "Enemy") {
+            //Debug.Log(other.transform.name);
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage, transform.gameObject.name);
+        }
+
+        //if the item is something that should destroy the spell
         if (!tagsToIngore.Contains(other.gameObject.tag)) {
+            //Debug.Log(other.transform.name);
             if (!layersToIgnore.Contains(other.gameObject.layer)) {
                 StartCoroutine(collided());
             }
@@ -77,17 +83,26 @@ public class SpellManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
+
+        //if the item is destructible
         if (other.gameObject.layer == 10)
         {
+            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, int.MaxValue);//hard coded as max value to get past hardnesses.
             triggerCollided(other);
-            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, 20f);//hard coded as 20 to get past (most) hardnesses.
+        }
+        //Or the item is on layer object
+        else if (other.gameObject.layer == 12)
+        {
+            triggerCollided(other);
         }
 
+        //if the item is an enemy
         if (other.gameObject.tag == "Enemy")
         {
             triggerCollided(other);
-            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
-        } else if (!tagsToIngore.Contains(other.gameObject.tag)) {
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage, transform.gameObject.name);
+        }//or something that should destroy the spells
+        else if (!tagsToIngore.Contains(other.gameObject.tag)) {
             if (!layersToIgnore.Contains(other.gameObject.layer)) {
                 triggerCollided(other);
                 StartCoroutine(collided());

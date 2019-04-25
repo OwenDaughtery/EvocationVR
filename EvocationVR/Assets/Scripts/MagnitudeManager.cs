@@ -12,7 +12,10 @@ public class MagnitudeManager : MonoBehaviour
         stats = transform.GetComponent<EnemyStats>();
     }
 
-
+    /// <summary>
+    /// Used to detect when this object has come into contact with another object
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag != "TestSpell" && stats.currentHealth >= 0)
@@ -20,12 +23,12 @@ public class MagnitudeManager : MonoBehaviour
 
             if (this.GetComponent<Rigidbody>().velocity.magnitude > stats.armour.getValue())
             {
-                stats.TakeDamage(this.GetComponent<Rigidbody>().velocity.magnitude);
+                stats.TakeDamage(this.GetComponent<Rigidbody>().velocity.magnitude, collision.transform.name);
             }
             else if (collision.transform.GetComponent<Rigidbody>().velocity.magnitude > stats.armour.getValue())
             {
 
-                stats.TakeDamage(collision.transform.GetComponent<Rigidbody>().velocity.magnitude);
+                stats.TakeDamage(collision.transform.GetComponent<Rigidbody>().velocity.magnitude, collision.transform.name);
             }
         }
     }

@@ -11,6 +11,7 @@ public class ForceSpellManager : SpellManager
     
     float growthRate = 0.4f;
     Vector3 originalScale;
+    public float force = 1f;
 
     private void Start()
     {
@@ -40,10 +41,22 @@ public class ForceSpellManager : SpellManager
     public override void triggerCollided(Collider other)
     {
         base.triggerCollided(other);
-        Debug.Log("center: " + transform.position);
-        Debug.Log("contacted at: " + transform.GetComponent<CapsuleCollider>().ClosestPointOnBounds(other.transform.position));
-        other.gameObject.transform.LookAt(-transform.position);
-        other.gameObject.transform.Translate(0.0f, 0.0f, 15 * Time.deltaTime);
+        applyForcePush(other);
+        
+    }
+
+    void applyForcePush(Collider other) {
+        Vector3 center = transform.position;
+        Vector3 contactedAt = transform.GetComponent<CapsuleCollider>().ClosestPointOnBounds(other.transform.position);
+        Vector3 pushedDirection = (contactedAt - center).normalized;
+        //Debug.Log("center: " + center);
+        //Debug.Log("contacted at: " + contactedAt);
+
+        other.gameObject.GetComponent<Rigidbody>().velocity = (pushedDirection * force)/other.gameObject.GetComponent<Rigidbody>().mass;
+
+        //other.gameObject.transform.LookAt(-transform.position);
+        //other.gameObject.transform.Translate(0.0f, 0.0f, 15 * Time.deltaTime);
+
         //edge - center will give a vector.
     }
 
