@@ -191,10 +191,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5780fa0f7835fb8409a0dce70b95dc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   force: 1000
   damage: 0
+=======
+  areaOfEffect: 0.1
+  whatIsDestructible:
+    serializedVersion: 2
+    m_Bits: 0
+  damage: 10
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
   maxLifeTime: 0.3
   currentLifeTime: 0
   tag: 
   tagsToIngore: []
-  layersToIgnore: 090000000b000000
+  layersToIgnore: 0b000000

@@ -24,6 +24,8 @@ public class CharacterCombat : MonoBehaviour
 
     public void attack(CharacterStats targetStats) {
         if (attackedCooldown <= 0f) {
+
+            print(myStats.damage.getValue());
             StartCoroutine(DoDamage(targetStats, attackDelay));
             attackedCooldown = 1f / attackSpeed;
         }
@@ -32,6 +34,6 @@ public class CharacterCombat : MonoBehaviour
 
     IEnumerator DoDamage(CharacterStats stats, float delay) {
         yield return new WaitForSeconds(delay);
-        stats.TakeDamage(myStats.damage.getValue(), gameObject.name);
+        stats.TakeDamage(myStats.damage.getValue());
     }
 }

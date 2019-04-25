@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2165565220271319312}
   - component: {fileID: 3739001531047078298}
   - component: {fileID: 1882149420471521102}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: EnemyChunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}

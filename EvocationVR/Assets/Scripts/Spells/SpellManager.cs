@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
+<<<<<<< HEAD
     public float force = 1f;
+=======
+    public float areaOfEffect = 0.01f;
+    public LayerMask whatIsDestructible;
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
     public int damage = 1;
     public float maxLifeTime;
     public float currentLifeTime;
@@ -55,6 +60,7 @@ public class SpellManager : MonoBehaviour
     /*private void OnCollisionEnter(Collision other)
     {
         
+<<<<<<< HEAD
 
         //if the item is destructible
         if (other.gameObject.layer==10) {
@@ -69,11 +75,16 @@ public class SpellManager : MonoBehaviour
         else if (other.gameObject.tag == "Enemy") {
             //Debug.Log(other.transform.name);
             other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage, transform.gameObject.name);
+=======
+        if (other.gameObject.layer==10) {
+            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, this.GetComponent<Rigidbody>().velocity.magnitude);
+        }
+        if (other.gameObject.tag == "Enemy") {
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
         }
 
-        //if the item is something that should destroy the spell
         if (!tagsToIngore.Contains(other.gameObject.tag)) {
-            //Debug.Log(other.transform.name);
             if (!layersToIgnore.Contains(other.gameObject.layer)) {
                 ////StartCoroutine(collided());
                 deactivate();
@@ -89,6 +100,7 @@ public class SpellManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD
         bool deactivateObject = false;
         //if the item is destructible
         if (other.gameObject.layer == 10)
@@ -108,15 +120,30 @@ public class SpellManager : MonoBehaviour
 
         //if the item is on enemy layer
         else if (other.gameObject.layer == 13)
+=======
+
+        if (other.gameObject.layer == 10)
+        {
+            triggerCollided(other);
+            other.gameObject.GetComponent<DestructibleManager>().reduceHealth(damage, 20f);//hard coded as 20 to get past (most) hardnesses.
+        }
+
+        if (other.gameObject.tag == "Enemy")
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
         {
             print("3");
             triggerCollided(other);
+<<<<<<< HEAD
             other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage, transform.gameObject.name);
             //deactivateObject = true;
         }//or something that should destroy the spells
 
         if (!tagsToIngore.Contains(other.gameObject.tag)) {
             print("4");
+=======
+            other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
+        } else if (!tagsToIngore.Contains(other.gameObject.tag)) {
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
             if (!layersToIgnore.Contains(other.gameObject.layer)) {
                 ////StartCoroutine(collided());
                 deactivateObject = true;

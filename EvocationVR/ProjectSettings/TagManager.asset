@@ -16,9 +16,6 @@ TagManager:
   - ForceSpell
   - Terrain
   - Cube
-  - Object
-  - BrokenMarbleCube
-  - BrokenSteelCube
   layers:
   - Default
   - TransparentFX
@@ -32,8 +29,13 @@ TagManager:
   - Spell
   - Destructible Terrain
   - Player
+<<<<<<< HEAD
   - Object
   - Enemy
+=======
+  - 
+  - 
+>>>>>>> parent of 6fe062c... updated mass, tweaked prefab weights, made marblebox
   - 
   - 
   - 

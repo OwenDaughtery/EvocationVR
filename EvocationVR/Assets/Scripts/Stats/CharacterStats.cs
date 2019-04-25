@@ -16,13 +16,13 @@ public class CharacterStats : MonoBehaviour
     }
 
 
-    public void TakeDamage(float damage, string dealer) {
+    public void TakeDamage(float damage) {
         
         damage -= armour.getValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
         currentHealth -= damage;
-        Debug.Log(transform.name + " takes " + damage + " from " + dealer);
+        Debug.Log(transform.name + " takes " + damage);
         if (currentHealth <= 0) {
             die();
         }
