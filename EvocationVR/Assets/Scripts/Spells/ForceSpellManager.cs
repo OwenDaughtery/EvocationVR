@@ -11,7 +11,7 @@ public class ForceSpellManager : SpellManager
     
     float growthRate = 0.4f;
     Vector3 originalScale;
-    public float force = 1f;
+    
 
     private void Start()
     {
@@ -32,9 +32,9 @@ public class ForceSpellManager : SpellManager
         updatePosition();
     }
 
-    public override void deactivated()
+    public override void deactivate()
     {
-        base.deactivated();
+        base.deactivate();
         transform.localScale = originalScale;
     }
 

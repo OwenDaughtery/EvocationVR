@@ -72,6 +72,7 @@ public class ObjectPoolerManager : MonoBehaviour
 
     public void returnToPool(GameObject gameObject, string tag){
         gameObject.SetActive(false);
+        gameObject.transform.position = Vector3.zero;
         pooledObjects.Add(gameObject);
         //following line causes issues with updating prefab 
         //gameObject.transform.parent = this.transform;
